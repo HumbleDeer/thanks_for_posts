@@ -364,7 +364,8 @@ class thankslist
 					$sort_key = $default_key;
 				}
 
-				$order_by .= $sort_key_sql[$sort_key] . ' ' . (($sort_dir == 'a') ? 'ASC' : 'DESC');
+				// Additionally order by u.username_clean ASC for possible equal other values
+				$order_by .= $sort_key_sql[$sort_key] . (($sort_dir == 'a') ? ' ASC' : ' DESC') . (($sort_key != 'a') ? ', u.username_clean ASC' : '');
 
 				// Build a relevant pagination_url
 				$params = [];
@@ -459,7 +460,7 @@ class thankslist
 							],
 						],
 						'ORDER_BY'	=> $order_by,
-						'GROUP_BY'	=> 't.' . $sortparam.'_id, u.user_id',
+						'GROUP_BY'	=> 't.' . $sortparam.'_id, u.username_clean',
 					];
 				}
 

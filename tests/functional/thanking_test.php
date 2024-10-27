@@ -37,7 +37,7 @@ class thanking_test extends \phpbb_functional_test_case
 		$this->assertStringContainsString($this->lang('REPUT_TOPLIST', 5), $crawler->filter('div[class="stat-block thanks-list"] > h3')->text());
 
 		// From controller test:
-		// user1 has: received thanks - 2
+		// user1 has: received thanks - 4
 		// admin has: received thanks - 1
 		$this->assertEquals('user1', $crawler->filter('div[class="stat-block thanks-list"] > p > a')->eq(0)->text());
 		$this->assertEquals('admin', $crawler->filter('div[class="stat-block thanks-list"] > p > a')->eq(1)->text());
@@ -47,15 +47,15 @@ class thanking_test extends \phpbb_functional_test_case
 	{
 		$this->login();
 
-		// Test if user profile info displayed
+		// Test if user1 profile info displayed
 		$this->add_lang_ext('gfksx/thanksforposts', 'thanks_mod');
 		$crawler = self::request('GET', "memberlist.php?mode=viewprofile&un=user1");
 
 		$this->assertStringContainsString($this->lang('GRATITUDES'), $crawler->filter('div[class="panel bg1"] > div > h3')->text());
-		$this->assertStringContainsString(html_entity_decode($this->lang('RECEIVED')) . ': 2 times', $crawler->filter('div[class="panel bg1"] > div > div[class="column2"] > dl > dt')->text());
+		$this->assertStringContainsString(html_entity_decode($this->lang('RECEIVED')) . ': 4 times', $crawler->filter('div[class="panel bg1"] > div > div[class="column2"] > dl > dt')->text());
 		$this->assertStringContainsString($this->lang('THANKS_LIST'), $crawler->filter('div[class="panel bg1"] > div > div[class="column2"] > dl > dd > a')->text());
-		$this->assertStringContainsString('./memberlist.php?mode=viewprofile&u=2', $crawler->filter('div[id="show_thanked"] > span > a')->attr('href'));
-		$this->assertStringContainsString('admin', $crawler->filter('div[id="show_thanked"] > span > a')->text());
+		$this->assertStringContainsString('./memberlist.php?mode=viewprofile&u=59', $crawler->filter('div[id="show_thanked"] > span > a')->attr('href'));
+		$this->assertStringContainsString('user2', $crawler->filter('div[id="show_thanked"] > span > a')->text());
 		$this->assertStringContainsString($this->lang('FOR_MESSAGE'), $crawler->filter('div[id="show_thanked"] > span > a')->eq(1)->text());
 	}
 
