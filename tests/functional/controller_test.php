@@ -46,8 +46,6 @@ class controller_test extends \phpbb_functional_test_case
 		$crawler = self::request('GET', "viewtopic.php?f=2&t={$topic['topic_id']}&sid={$this->sid}");
 		$thanks_link1 = str_replace('./', '', html_entity_decode($crawler->filter('#lnk_thanks_post' . ((int) $post['post_id'] - 1))->attr('href')));
 		$thanks_link2 = str_replace('./', '', html_entity_decode($crawler->filter('#lnk_thanks_post' . $post['post_id'])->attr('href')));
-
-		// Create thanks for every user1's post from user2
 		self::request('GET', $thanks_link1);
 		self::request('GET', $thanks_link2);
 
@@ -67,9 +65,9 @@ class controller_test extends \phpbb_functional_test_case
 		$this->add_lang_ext('gfksx/thanksforposts', 'thanks_mod');
 
 		// At this point:
-		// admin has: received thanks - 1, given thanks - 2
-		// user1 has: received thanks - 4, given thanks - 1
-		// user2 has: received thanks - 0, given thanks - 2
+		// admin has: received thanks - 1 (user1), given thanks - 2 (user1)
+		// user1 has: received thanks - 4 (admin - 2, user2 - 2), given thanks - 1 (admin)
+		// user2 has: received thanks - 0, given thanks - 2 (user1)
 		$crawler = self::request('GET', 'app.php/thankslist');
 		$this->assertStringContainsString($this->lang('THANKS_USER'), $crawler->filter('h2')->text());
 		$this->assertStringContainsString('3 users', $crawler->filter('div.pagination')->text());

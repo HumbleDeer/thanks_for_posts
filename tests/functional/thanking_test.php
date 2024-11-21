@@ -54,8 +54,8 @@ class thanking_test extends \phpbb_functional_test_case
 		$this->assertStringContainsString($this->lang('GRATITUDES'), $crawler->filter('div[class="panel bg1"] > div > h3')->text());
 		$this->assertStringContainsString(html_entity_decode($this->lang('RECEIVED')) . ': 4 times', $crawler->filter('div[class="panel bg1"] > div > div[class="column2"] > dl > dt')->text());
 		$this->assertStringContainsString($this->lang('THANKS_LIST'), $crawler->filter('div[class="panel bg1"] > div > div[class="column2"] > dl > dd > a')->text());
-		$this->assertStringContainsString('./memberlist.php?mode=viewprofile&u=59', $crawler->filter('div[id="show_thanked"] > span > a')->attr('href'));
-		$this->assertStringContainsString('user2', $crawler->filter('div[id="show_thanked"] > span > a')->text());
+		$this->assertStringContainsString('./memberlist.php?mode=viewprofile&u=2', $crawler->filter('div[id="show_thanked"] > span > a')->attr('href'));
+		$this->assertStringContainsString('admin', $crawler->filter('div[id="show_thanked"] > span > a')->text());
 		$this->assertStringContainsString($this->lang('FOR_MESSAGE'), $crawler->filter('div[id="show_thanked"] > span > a')->eq(1)->text());
 	}
 

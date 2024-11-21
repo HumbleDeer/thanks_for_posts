@@ -410,12 +410,12 @@ class thankslist
 
 				if ($sort_key == 'e')
 				{
-					$sortparam = 'poster';
+					$sortparam = 'poster_id';
 					$rows = $rowsp;
 				}
 				else if ($sort_key == 'f')
 				{
-					$sortparam = 'user';
+					$sortparam = 'user_id';
 					$rows = $rowsu;
 				}
 				else
@@ -451,16 +451,16 @@ class thankslist
 				if ($sortparam)
 				{
 					$sql_array = [
+						'SELECT'	=> 't.' . $sortparam . ' , count(t . ' . $sortparam . ') as count_thanks',
 						'FROM'		=> [$this->thanks_table => 't'],
-						'SELECT'	=> $sql_array['SELECT'] .= ', count(t . ' . $sortparam . '_id) as count_thanks',
 						'LEFT_JOIN'	=> [
 							[
 								'FROM'	=> [$this->users_table => 'u'],
-								'ON'	=> 't . ' . $sortparam . '_id = u.user_id',
+								'ON'	=> 't . ' . $sortparam . ' = u.user_id',
 							],
 						],
 						'ORDER_BY'	=> $order_by,
-						'GROUP_BY'	=> 't.' . $sortparam.'_id, u.username_clean',
+						'GROUP_BY'	=> 't.' . $sortparam . ', u.username_clean',
 					];
 				}
 
@@ -496,7 +496,7 @@ class thankslist
 					$user_list = [];
 					do
 					{
-						$user_list[] = (int) $row['user_id'];
+						$user_list[] = (int) $row[$sortparam ?: 'user_id'];
 					}
 					while ($row = $this->db->sql_fetchrow($result));
 					$this->db->sql_freeresult($result);
