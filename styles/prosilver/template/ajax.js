@@ -18,6 +18,8 @@ phpbb.addAjaxCallback('handle_thanks', function(res) {
 
 	var l_thanks_received = res.l_thanks_received;
 	var l_thanks_given = res.l_thanks_given;
+	var l_thanks_info_give = res.l_thanks_info_give;
+	var l_thanks_info_remove = res.l_thanks_info_remove;
 
 	var u_received = '<a href="' + res.u_received + '">' + l_thanks_received + '</a>';
 	var u_given = '<a href="' + res.u_given + '">' + l_thanks_given + '</a>';
@@ -26,6 +28,10 @@ phpbb.addAjaxCallback('handle_thanks', function(res) {
 	var thanksList = $(thanksListId);
 	var userGive = $(userGiveId);
 	var userReceive = $(userReceiveId);
+
+	$.notify.defaults({
+		autoHideDelay: 2000
+	});
 
 	thanksLink.blur();
 	$('i',thanksLink).removeClass(mode == 'insert' ? 'fa-thumbs-o-up' : 'fa-thumbs-o-down').addClass(mode == 'insert' ? "fa-thumbs-o-down" : 'fa-thumbs-o-up');
@@ -52,6 +58,8 @@ phpbb.addAjaxCallback('handle_thanks', function(res) {
 		if (!res.s_remove_thanks) { // Remove un-thank button if thanks removal is not allowed
 			thanksLink.parent('li').remove();
 		}
+
+		$.notify(l_thanks_info_give, "success");
 	} else 	if (mode == 'delete') { // Handle thanks deletion
 		if (res.received_count == 0) { // Handle received thanks count in posts miniprofiles
 			userReceive.html('');
@@ -64,6 +72,8 @@ phpbb.addAjaxCallback('handle_thanks', function(res) {
 		} else {
 			$('a', userGive).html(l_thanks_given);
 		}
+
+		$.notify(l_thanks_info_remove, "warn");
 	}
 
 	// Handle posts thanker lists and ratings

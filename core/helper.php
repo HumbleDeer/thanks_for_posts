@@ -969,7 +969,8 @@ class helper
 				'l_received'		=> $this->language->lang('RECEIVED'),
 				'l_thanks_given'	=> $this->language->lang('THANKS', $given_count),
 				'l_thanks_received'	=> $this->language->lang('THANKS', $received_count),
-
+				'l_thanks_info_give'=> $this->language->lang('THANKS_INFO_GIVE'),
+				'l_thanks_info_remove'	=> $this->language->lang('THANKS_INFO_REMOVE'),
 				'l_remove_thanks'		=> $this->language->lang('REMOVE_THANKS'),
 				'l_remove_thanks_short'	=> $this->language->lang('REMOVE_THANKS_SHORT'),
 				'l_thank_post'			=> $this->language->lang('THANK_POST'),
