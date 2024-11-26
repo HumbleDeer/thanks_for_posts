@@ -305,11 +305,6 @@ class helper
 		$row = $this->get_post_info((int) $post_id);
 		$redirect_url = append_sid("{$this->phpbb_root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;p=$post_id#p$post_id");
 
-		$hidden = build_hidden_fields([
-			'to_id'		=> $to_id,
-			'rthanks'	=> $post_id,
-		]);
-
 		/**
 		 * This event allows to interrupt before a thanks is deleted
 		 *
@@ -326,51 +321,43 @@ class helper
 			trigger_error($this->language->lang('DISABLE_REMOVE_THANKS') . '<br /><br />' . $this->language->lang('RETURN_POST', '<a href="' . $redirect_url . '">', '</a>'));
 		}
 
-		if (confirm_box(true, 'REMOVE_THANKS', $hidden))
+		if ($this->user->data['user_type'] != USER_IGNORE && !empty($to_id) && $this->auth->acl_get('f_thanks', $forum_id))
 		{
-			if ($this->user->data['user_type'] != USER_IGNORE && !empty($to_id) && $this->auth->acl_get('f_thanks', $forum_id))
+			$sql = 'DELETE FROM ' . $this->thanks_table . '
+				WHERE post_id =' . (int) $post_id . ' AND user_id = ' . (int) $this->user->data['user_id'];
+			$this->db->sql_query($sql);
+
+			if ($this->db->sql_affectedrows())
 			{
-				$sql = 'DELETE FROM ' . $this->thanks_table . '
-					WHERE post_id =' . (int) $post_id . ' AND user_id = ' . (int) $this->user->data['user_id'];
-				$this->db->sql_query($sql);
+				$thanks_data = [
+					'user_id'	=> (int) $this->user->data['user_id'],
+					'post_id'	=> $post_id,
+					'poster_id'	=> $to_id,
+					'topic_id'	=> (int) $row['topic_id'],
+					'forum_id'	=> $forum_id,
+					'thanks_time'	=> time(),
+					'username'	=> $this->user->data['username'],
+					'lang_act'	=> 'REMOVE',
+					'post_subject'	=> $row['post_subject'],
+				];
+				$this->add_notification($thanks_data, 'gfksx.thanksforposts.notification.type.thanks_remove');
 
-				if ($this->db->sql_affectedrows())
+				$this->handle_ajax_request('delete', $row, $to_id, $from_id, $post_list);
+
+				if ($this->config['thanks_info_page'])
 				{
-					$thanks_data = [
-						'user_id'	=> (int) $this->user->data['user_id'],
-						'post_id'	=> $post_id,
-						'poster_id'	=> $to_id,
-						'topic_id'	=> (int) $row['topic_id'],
-						'forum_id'	=> $forum_id,
-						'thanks_time'	=> time(),
-						'username'	=> $this->user->data['username'],
-						'lang_act'	=> 'REMOVE',
-						'post_subject'	=> $row['post_subject'],
-					];
-					$this->add_notification($thanks_data, 'gfksx.thanksforposts.notification.type.thanks_remove');
-
-					$this->handle_ajax_request('delete', $row, $to_id, $from_id, $post_list);
-
-					if ($this->config['thanks_info_page'])
-					{
-						meta_refresh (1, $redirect_url);
-						trigger_error($this->language->lang('THANKS_INFO_REMOVE') . '<br /><br />' . $this->language->lang('RETURN_POST', '<a href="' . $redirect_url . '">', '</a>'));
-					}
-					else
-					{
-						redirect ($redirect_url);
-					}
+					meta_refresh (1, $redirect_url);
+					trigger_error($this->language->lang('THANKS_INFO_REMOVE') . '<br /><br />' . $this->language->lang('RETURN_POST', '<a href="' . $redirect_url . '">', '</a>'));
 				}
 				else
 				{
-					trigger_error($this->language->lang('INCORRECT_THANKS') . '<br /><br />' . $this->language->lang('RETURN_POST', '<a href="' . $redirect_url . '">', '</a>'));
+					redirect ($redirect_url);
 				}
 			}
-		}
-		else
-		{
-			confirm_box(false, 'REMOVE_THANKS', $hidden);
-			redirect($redirect_url);
+			else
+			{
+				trigger_error($this->language->lang('INCORRECT_THANKS') . '<br /><br />' . $this->language->lang('RETURN_POST', '<a href="' . $redirect_url . '">', '</a>'));
+			}
 		}
 	}
 

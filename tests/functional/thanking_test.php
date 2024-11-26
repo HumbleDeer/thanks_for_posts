@@ -78,15 +78,9 @@ class thanking_test extends \phpbb_functional_test_case
 		$this->assertStringContainsString($this->lang('THANK_TEXT_1'), $crawler->filter('div[id="list_thanks' . $post['post_id'] . '"]')->text());
 		$this->assertEquals($this->lang('REMOVE_THANKS') . 'user1', $thanks_button_title);
 
-		// Test thanking process
+		// Test thank removal
 		$crawler = self::request('GET', $thanks_link);
-		$this->assertStringContainsString($this->lang('REMOVE_THANKS'), $crawler->filter('h2')->text());
-
-		$form = $crawler->selectButton('Yes')->form();
-		$crawler = self::submit($form);
-
 		$crawler = self::request('GET', "viewtopic.php?f=2&t={$post['topic_id']}&sid={$this->sid}&p={$post['post_id']}#p{$post['post_id']}");
-
 		$thanks_button_title = $crawler->filter('#lnk_thanks_post' . $post['post_id'])->attr('title');
 		$this->assertEquals($this->lang('THANK_POST') . 'user1', $thanks_button_title);
 	}
