@@ -167,7 +167,7 @@ jobs:
                   MATRIX_DB: ${{ matrix.db }}
               run: |
                   db=$(echo "${MATRIX_DB%%:*}")
-                  echo "::set-output name=db::$db"
+                  echo "db=$db" >> $GITHUB_OUTPUT
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -281,7 +281,7 @@ jobs:
                   MATRIX_DB: ${{ matrix.db }}
               run: |
                   db=$(echo "${MATRIX_DB%%:*}")
-                  echo "::set-output name=db::$db"
+                  echo "db=$db" >> $GITHUB_OUTPUT
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
