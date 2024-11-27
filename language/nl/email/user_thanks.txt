@@ -1,0 +1,10 @@
+Bedankt: {THANKS_SUBG} — "{POST_SUBJECT}"
+
+Hallo {POSTER_NAME},
+
+Je krijgt dit bericht omdat {USERNAME} {POST_THANKS} "{POST_SUBJECT}" op "{SITENAME}".
+
+Als je dit bericht wilt bekijken, klik hier:
+{U_POST_THANKS}
+
+{EMAIL_SIG}
