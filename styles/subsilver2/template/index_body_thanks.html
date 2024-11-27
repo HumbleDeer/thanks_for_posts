@@ -9,7 +9,7 @@
 		<td class="row1" align="center" valign="middle"><img src="{{ T_THEME_PATH }}/images/whosonline.gif" alt="{{ lang('TOP_THANKS_LIST') }}" /></td>
 		<td class="row1" width="100%"><p class="genmed">
 			{% set thankslist = [] %}
-			{% for user in toplist %}
+			{% for user in toplistonindex %}
 				{% set thankslist = thankslist|merge([user.USERNAME ~ ' (' ~ user.THANKS_COUNT ~ ')']) %}
 			{% endfor %}
 

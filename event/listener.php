@@ -143,7 +143,7 @@ class listener implements EventSubscriberInterface
 			'L_TOP_THANKS_LIST'	=> $this->config['thanks_top_number'] ? $this->language->lang('REPUT_TOPLIST', (int) $this->config['thanks_top_number']) : false,
 		]);
 
-		$this->template->assign_block_vars_array('toplist', $thanks_list);
+		$this->template->assign_block_vars_array('toplistonindex', $thanks_list);
 	}
 
 	public function memberlist_viewprofile($event)

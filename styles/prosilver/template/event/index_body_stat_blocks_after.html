@@ -3,7 +3,7 @@
 	<h3><a href="{{ U_THANKS_LIST }}">{{ lang('TOP_THANKS_LIST') }}</a></h3>
 	<p>
 		{% set thankslist = [] %}
-		{% for user in toplist %}
+		{% for user in toplistonindex %}
 			{% set thankslist = thankslist|merge([user.USERNAME ~ ' (' ~ user.THANKS_COUNT ~ ')']) %}
 		{% endfor %}
 
