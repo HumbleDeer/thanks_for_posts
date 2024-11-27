@@ -684,8 +684,8 @@ class helper
 		if ($this->config['thanks_topic_reput_view'])
 		{
 			$sql = 'SELECT topic_id, COUNT(*) AS topic_thanks
-				FROM ' . $this->thanks_table . "
-				WHERE " . $this->db->sql_in_set('topic_id', $topic_list) . '
+				FROM ' . $this->thanks_table . '
+				WHERE ' . $this->db->sql_in_set('topic_id', $topic_list) . '
 				GROUP BY topic_id';
 			$result = $this->db->sql_query($sql);
 
@@ -703,9 +703,14 @@ class helper
 	{
 		if ($this->config['thanks_topic_reput_view'])
 		{
-			$sql = 'SELECT MAX(tally) AS max_topic_thanks
-				FROM (SELECT topic_id, COUNT(*) AS tally FROM ' . $this->thanks_table . ' GROUP BY topic_id) t';
-			$result = $this->db->sql_query($sql);
+			$sql_ary = [
+				'SELECT'	=> 'COUNT(t.topic_id) AS max_topic_thanks',
+				'FROM'		=> [$this->thanks_table => 't'],
+				'GROUP_BY'	=> 't.topic_id',
+				'ORDER_BY'	=> 'max_topic_thanks DESC',
+			];
+
+			$result = $this->db->sql_query_limit($this->db->sql_build_query('SELECT', $sql_ary), 1);
 			$this->max_topic_thanks = (int) $this->db->sql_fetchfield('max_topic_thanks');
 			$this->db->sql_freeresult($result);
 		}
@@ -717,9 +722,14 @@ class helper
 	{
 		if ($this->config['thanks_post_reput_view'])
 		{
-			$sql = 'SELECT MAX(tally) AS max_post_thanks
-				FROM (SELECT post_id, COUNT(*) AS tally FROM ' . $this->thanks_table . ' GROUP BY post_id) t';
-			$result = $this->db->sql_query($sql);
+			$sql_ary = [
+				'SELECT'	=> 'COUNT(t.post_id) AS max_post_thanks',
+				'FROM'		=> [$this->thanks_table => 't'],
+				'GROUP_BY'	=> 't.post_id',
+				'ORDER_BY'	=> 'max_post_thanks DESC',
+			];
+
+			$result = $this->db->sql_query_limit($this->db->sql_build_query('SELECT', $sql_ary), 1);
 			$this->max_post_thanks = (int) $this->db->sql_fetchfield('max_post_thanks');
 			$this->db->sql_freeresult($result);
 		}
@@ -731,11 +741,11 @@ class helper
 	public function get_toplist_index($ex_fid_ary)
 	{
 		$sql_ary = [
-			'SELECT' =>  't.poster_id, COUNT(t.user_id) AS tally',
-			'FROM' => [$this->thanks_table => 't'],
-			'WHERE' => $this->db->sql_in_set('t.forum_id', $ex_fid_ary, true) . ' OR t.forum_id = 0',
-			'GROUP_BY' => 't.poster_id',
-			'ORDER_BY' => 'tally DESC',
+			'SELECT'	=> 't.poster_id, COUNT(t.user_id) AS tally',
+			'FROM'		=> [$this->thanks_table => 't'],
+			'WHERE'		=> $this->db->sql_in_set('t.forum_id', $ex_fid_ary, true) . ' OR t.forum_id = 0',
+			'GROUP_BY'	=> 't.poster_id',
+			'ORDER_BY'	=> 'tally DESC',
 		];
 
 		$cache_ttl = 86400; // Cache thanks toplist on index for 24 hours
@@ -782,8 +792,8 @@ class helper
 			if ($forum_thanks_rating = $this->cache->get('_forum_thanks_rating'))
 			{
 				$sql = 'SELECT forum_id, COUNT(*) AS forum_thanks
-					FROM ' . $this->thanks_table . "
-					WHERE " . $this->db->sql_in_set('forum_id', $forum_thanks_rating) . '
+					FROM ' . $this->thanks_table . '
+					WHERE ' . $this->db->sql_in_set('forum_id', $forum_thanks_rating) . '
 					GROUP BY forum_id';
 				$result = $this->db->sql_query($sql);
 
@@ -801,10 +811,15 @@ class helper
 	{
 		if ($this->config['thanks_forum_reput_view'])
 		{
-			$sql = 'SELECT MAX(tally) AS max_forum_thanks
-				FROM (SELECT forum_id, COUNT(*) AS tally FROM ' . $this->thanks_table . ' GROUP BY forum_id) t 
-				WHERE forum_id <> 0';
-			$result = $this->db->sql_query($sql);
+			$sql_ary = [
+				'SELECT'	=> 'COUNT(t.forum_id) AS max_forum_thanks',
+				'FROM'		=> [$this->thanks_table => 't'],
+				'WHERE'		=> 't.forum_id <> 0',
+				'GROUP_BY'	=> 't.forum_id',
+				'ORDER_BY'	=> 'max_forum_thanks DESC',
+			];
+
+			$result = $this->db->sql_query_limit($this->db->sql_build_query('SELECT', $sql_ary), 1);
 			$this->max_forum_thanks = (int) $this->db->sql_fetchfield('max_forum_thanks');
 			$this->db->sql_freeresult($result);
 		}
