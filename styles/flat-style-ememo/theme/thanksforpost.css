@@ -1,0 +1,11 @@
+.button .icon {
+    bottom:0;
+}
+
+.button .icon-stack{
+	content:"";
+}
+
+.button .icon-stack .icon{
+	content:"";
+}
