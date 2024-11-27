@@ -40,30 +40,30 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, [
-	'CLEAR_LIST_THANKS'			=> 'bedankjes-lijst wissen',
-	'CLEAR_LIST_THANKS_CONFIRM'	=> 'Ben je zeker dat je de gebruikers bedankjes wilt verwijderen?',
-	'CLEAR_LIST_THANKS_GIVE'	=> 'Lijst van bedankjes door de gebruiker werd gewist.',
-	'CLEAR_LIST_THANKS_POST'	=> 'Lijst van bedankjes in het bericht werd gewist.',
-	'CLEAR_LIST_THANKS_RECEIVE'	=> 'Lijst van bedankjes die de gebruiker kreeg werd gewist.',
+	'CLEAR_LIST_THANKS'			=> '♥ hartjes-lijst wissen',
+	'CLEAR_LIST_THANKS_CONFIRM'	=> 'Ben je zeker dat je de gebruikers ♥ hartjes wilt verwijderen?',
+	'CLEAR_LIST_THANKS_GIVE'	=> 'Lijst van ♥ hartjes die de gebruiker gaf werd gewist.',
+	'CLEAR_LIST_THANKS_POST'	=> 'Lijst van ♥ hartjes die het bericht kreeg werd gewist.',
+	'CLEAR_LIST_THANKS_RECEIVE'	=> 'Lijst van ♥ hartjes die de gebruiker kreeg werd gewist.',
 
-	'DISABLE_REMOVE_THANKS'		=> 'Bedankjes verwijderen is uitgeschakeld',
+	'DISABLE_REMOVE_THANKS'		=> 'Het verwijderen van ♥ hartjes werd door de beheerder uitgeschakeld',
 
 	'GIVEN'						=> '♥ gegeven',
-	'GLOBAL_INCORRECT_THANKS'	=> 'Je kan geen ♥ geven aan deze Globale Aankondiging omdat deze geen aanwijzing naar een forum heeft.',
-	'GRATITUDES'				=> 'Alle ♥Hartjes',
+	'GLOBAL_INCORRECT_THANKS'	=> 'Je kan geen ♥ hartje geven aan een globale aankondiging die niet verwijst naar een specifiek forum..',
+	'GRATITUDES'				=> 'Alle ♥ hartjes',
 
-	'INCORRECT_THANKS'			=> 'Foutief ♥Hartje',
+	'INCORRECT_THANKS'			=> 'Ongeldig ♥ hartje',
 
-	'JUMP_TO_FORUM'				=> 'Spring naar forum',
-	'JUMP_TO_TOPIC'				=> 'Spring naar topic',
+	'JUMP_TO_FORUM'				=> 'Ga naar forum',
+	'JUMP_TO_TOPIC'				=> 'Ga naar onderwerp',
 
-	'FOR_MESSAGE'				=> ' voor bericht',
-	'FURTHER_THANKS'     	    => [
-		1 => ' en nog iemand',
-		2 => ' en nog  %d gebuikers',
-	],
+	'FOR_MESSAGE'               => ' voor het bericht',
+    'FURTHER_THANKS'            => [
+        1 => ' en nog één gebruiker',
+        2 => ' en nog %d gebruikers',
+    ],
 
-	'NO_VIEW_USERS_THANKS'		=> 'Je hebt geen rechten om de ♥-lijst te bekijken.',
+	'NO_VIEW_USERS_THANKS'		=> 'Je bent niet bemachtigd om de ♥ hartjeslijst te bekijken.',
 
 	'NOTIFICATION_THANKS_GIVE'	=> [
 		1 => '%1$s <strong>gaf je een ♥ hartje</strong> voor je bericht:',
@@ -82,14 +82,14 @@ $lang = array_merge($lang, [
 	'REMOVE_THANKS_SHORT'		=> 'Verwijder ♥ hartjes',
 	'REPUT'						=> 'Puntjes',
 	'REPUT_TOPLIST'				=> 'Beste ♥ hartjes — %d',
-	'RATING_LOGIN_EXPLAIN'		=> 'Je hebt geen rechten om de ♥ hartjes toplijst te bekijken.',
-	'RATING_NO_VIEW_TOPLIST'	=> 'Je hebt geen rechten om de ♥ hartjes toplijst te bekijken.',
+	'RATING_LOGIN_EXPLAIN'		=> 'Je bent niet bemachtigd om de ♥ hartjes toplijst te bekijken.',
+	'RATING_NO_VIEW_TOPLIST'	=> 'Je bent niet bemachtigd om de ♥ hartjes toplijst te bekijken.',
 	'RATING_VIEW_TOPLIST_NO'	=> 'De ♥ hartjes toplijst lijst is leeg, of uitgeschakeld.',
 	'RATING_FORUM'				=> 'Forum',
 	'RATING_POST'				=> 'Bericht',
-	'RATING_TOP_FORUM'			=> 'Hoogst ♥ beharte forums',
-	'RATING_TOP_POST'			=> 'Hoogst ♥ beharte berichten',
-	'RATING_TOP_TOPIC'			=> 'Hoogst ♥ beharte onderwerpen',
+	'RATING_TOP_FORUM'			=> 'Forum met meeste ♥ hartjes',
+	'RATING_TOP_POST'			=> 'Bericht met meeste ♥ hartjes',
+	'RATING_TOP_TOPIC'			=> 'Onderwerp met meeste ♥ hartjes',
 	'RATING_TOPIC'				=> 'Onderwerp',
 
 	'THANK'						=> 'keer',
@@ -98,7 +98,7 @@ $lang = array_merge($lang, [
 	'THANK_TEXT_2'				=> ' een ♥? ',
 	'THANK_TEXT_2PL'			=> ' een ♥? (totaal %d):',
 	'THANK_POST'				=> 'Geef de auteur van dit bericht een ♥ hartje: ',
-	'THANK_POST_SHORT'			=> '♥ hartje gegeven',
+	'THANK_POST_SHORT'			=> '♥ Hartje',
 	'THANKS'					=> [
 		1	=> '%d',
 		2	=> '%d',
@@ -110,7 +110,7 @@ $lang = array_merge($lang, [
 	'THANKS_PM_MES_GIVE'		=> 'heeft jou een ♥ hartje gegeven voor je bericht',
 	'THANKS_PM_MES_REMOVE'		=> 'heeft zich bedacht over hun ♥ hartje op je bericht',
 	'THANKS_PM_SUBJECT_GIVE'	=> '♥ Hartje gegeven voor het bericht',
-	'THANKS_PM_SUBJECT_REMOVE'	=> 'Verwijder ♥ hartje voor het bericht',
-	'THANKS_USER'				=> 'Lijst van ♥ hartjes',
+	'THANKS_PM_SUBJECT_REMOVE'	=> 'Verwijderd ♥ hartje voor het bericht',
+	'THANKS_USER'				=> '♥ Hartjeslijst',
 	'TOPLIST'					=> 'Berichten ranglijst',
 ]);

@@ -1,8 +1,8 @@
-Bedankt: {THANKS_SUBG} — "{POST_SUBJECT}"
+Een hart toegestoken: {THANKS_SUBG} — "{POST_SUBJECT}"
 
 Hallo {POSTER_NAME},
 
-Je krijgt dit bericht omdat {USERNAME} {POST_THANKS} "{POST_SUBJECT}" op "{SITENAME}".
+Je krijgt deze melding omdat {USERNAME} je een ♥ hart ♥ heeft toegestoken voor je bericht "{POST_SUBJECT}" op "{SITENAME}".
 
 Als je dit bericht wilt bekijken, klik hier:
 {U_POST_THANKS}
