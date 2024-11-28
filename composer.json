@@ -1,7 +1,7 @@
 {
     "name": "gfksx/thanksforposts",
     "type": "phpbb-extension",
-    "description": "Adds the ability to thank the author and to use per posts/topics/forum rating system based on the count of thanks.",
+    "description": "Adds the ability to t̶h̶a̶n̶k̶  ♥ the author and to use per posts/topics/forum rating system based on the count of t̶h̶a̶n̶k̶s̶ ♥♥♥♥. Ememoforum ♥heartsie♥ edition, for the dutch language interface.",
     "homepage": "http://www.phpbbguru.net",
     "version": "2.1.1",
     "license": "GPL-2.0-only",
@@ -21,7 +21,7 @@
         "php": "^7.2 || ^8.0.0"
     },
    "extra": {
-        "display-name": "Thanks for posts",
+        "display-name": "Thanks for posts (Ememo ♥)",
         "soft-require": {
            "phpbb/phpbb": ">=3.3.11"
         },
